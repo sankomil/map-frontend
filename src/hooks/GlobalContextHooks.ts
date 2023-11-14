@@ -17,11 +17,21 @@ export const useGetRoute = () => {
 
     if (err) {
       setError(err?.message);
+      setPaths([]);
+      setTimeout(() => {
+        setError("");
+      }, 5000);
       return;
     }
 
     if (res.status === "success") {
       setPaths(res.path);
+    } else if (res.status === "failure") {
+      setError(res?.error);
+      setPaths([]);
+      setTimeout(() => {
+        setError("");
+      }, 5000);
     } else {
       getPathRoute({ token });
     }
@@ -31,6 +41,10 @@ export const useGetRoute = () => {
     const { res, err } = await postRoute({ origin, destination });
     if (err) {
       setError(err?.message);
+      setPaths([]);
+      setTimeout(() => {
+        setError("");
+      }, 5000);
       return;
     }
 
