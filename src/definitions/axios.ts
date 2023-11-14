@@ -14,3 +14,7 @@ export interface IGetRouteResponse {
   total_time?: number;
   path?: string[][];
 }
+
+export interface IPostRouteResponse {
+  token: string;
+}

@@ -1,21 +1,26 @@
 import axios, { AxiosError } from "axios";
-import { IPostRoute, IGetRoute, IGetRouteResponse } from "../definitions";
+import {
+  IPostRoute,
+  IGetRoute,
+  IGetRouteResponse,
+  IPostRouteResponse,
+} from "../definitions";
 
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_ENDPOINT,
 });
 
 export const postRoute = async ({ origin, destination }: IPostRoute) => {
-  let res = {};
-  let err: AxiosError | null = null;
+  let res: IPostRouteResponse = { token: "" };
+  let err: AxiosError | any = null;
 
   await axiosInstance
     .post("/route", {
       origin,
       destination,
     })
-    .then((res) => {
-      res = res.data;
+    .then((response) => {
+      res = response.data;
     })
     .catch((e: AxiosError) => {
       console.error("error", e);
@@ -27,7 +32,7 @@ export const postRoute = async ({ origin, destination }: IPostRoute) => {
 
 export const getRoute = async ({ token }: IGetRoute) => {
   let res: IGetRouteResponse = { status: "failure" };
-  let err: AxiosError | null = null;
+  let err: AxiosError | any = null;
 
   await axiosInstance
     .get(`/route/${token}`)
@@ -40,18 +45,4 @@ export const getRoute = async ({ token }: IGetRoute) => {
     });
 
   return { res, err };
-};
-
-export const pollGetRoute = async ({ token }: IGetRoute) => {
-  const { res, err } = await getRoute({ token });
-
-  if (err) {
-    return err;
-  }
-
-  if (res.status === "success") {
-    return res;
-  } else {
-    pollGetRoute({ token });
-  }
 };
