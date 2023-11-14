@@ -1,23 +1,31 @@
 import React from "react";
 import { Map as GoogleMap, Marker } from "@vis.gl/react-google-maps";
+import { useGlobalContext } from "../../hooks";
+import "./index.css";
 
 export const Map: React.FC = () => {
+  const { paths } = useGlobalContext();
+  console.log("paths", paths);
   return (
-    <div
-      style={{
-        height: "100vh",
-        width: "100vw",
-        position: "relative",
-        border: "1px solid black",
-      }}
-    >
+    <div className="map-container">
       <GoogleMap
-        zoom={6}
-        center={{ lat: 53.54992, lng: 10.00678 }}
+        zoom={12.5}
+        center={{
+          lat: paths.length ? parseFloat(paths[0][0]) : 22.396428,
+          lng: paths.length ? parseFloat(paths[0][1]) : 114.109497,
+        }}
         gestureHandling={"greedy"}
         disableDefaultUI={true}
       >
-        <Marker position={{ lat: 53.54992, lng: 10.00678 }} />
+        {paths.map((path, index) => {
+          return (
+            <Marker
+              key={`${path[0]}-${path[1]}-${index}`}
+              position={{ lat: parseFloat(path[0]), lng: parseFloat(path[1]) }}
+              label={`${index + 1}`}
+            />
+          );
+        })}
       </GoogleMap>
     </div>
   );
