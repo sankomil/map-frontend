@@ -7,12 +7,5 @@
   border: 1px solid black;
   border-radius: 0 50px 50px 0;
   z-index: 10;
-  background-color: aqua;
-  background: rgb(180, 102, 111);
-  background: linear-gradient(
-    90deg,
-    rgba(180, 102, 111, 1) 0%,
-    rgba(254, 164, 125, 1) 35%,
-    rgba(253, 238, 173, 1) 100%
-  );
+  background-color: #fff;
 }
