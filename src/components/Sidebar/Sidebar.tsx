@@ -1,10 +1,11 @@
 import React, { FormEvent, useState } from "react";
+import { useGetRoute, useGlobalContext } from "../../hooks";
 import "./index.css";
-import { useGetRoute } from "../../hooks";
 
 export const Sidebar: React.FC = () => {
   const [origin, setOrigin] = useState<string>("");
   const [destination, setDestination] = useState<string>("");
+  const { error } = useGlobalContext();
   const { getPathToken } = useGetRoute();
 
   const onSubmit = async (e?: FormEvent<HTMLFormElement>): Promise<void> => {
@@ -68,6 +69,7 @@ export const Sidebar: React.FC = () => {
             className="btn btn-success me-3"
             type="button"
             onClick={() => onSubmit()}
+            disabled={!origin && !destination}
           >
             Submit
           </button>
@@ -75,6 +77,7 @@ export const Sidebar: React.FC = () => {
             Cancel
           </button>
         </div>
+        {error ? <p className="text-danger mt-4">{error}</p> : null}
       </div>
     </form>
   );
