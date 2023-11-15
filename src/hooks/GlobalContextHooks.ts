@@ -10,12 +10,23 @@ import {
 } from "../definitions";
 
 export const useGlobalContext = (): IUseGlobalContext => {
-  const { error, paths, token } = useContext(DefaultGlobalContext);
-  return { paths, error, token };
+  const { error, paths } = useContext(DefaultGlobalContext);
+  return { paths, error };
 };
 
 export const useGetRoute = (): IUseGetRoute => {
-  const { setPaths, setError, paths, error } = useContext(DefaultGlobalContext);
+  const {
+    setPaths,
+    setError,
+    paths,
+    error,
+    setTotalDistance,
+    setTotalTime,
+    totalDistance,
+    totalTime,
+    loading,
+    setLoading,
+  } = useContext(DefaultGlobalContext);
 
   const getPathRoute = async ({ token }: IGetRoute) => {
     const { res, err } = await getRoute({ token: token || "" });
@@ -23,6 +34,9 @@ export const useGetRoute = (): IUseGetRoute => {
     if (err) {
       setError(err?.message);
       setPaths([]);
+      setLoading(false);
+      setTotalDistance(null);
+      setTotalTime(null);
       setTimeout(() => {
         setError("");
       }, 5000);
@@ -31,9 +45,15 @@ export const useGetRoute = (): IUseGetRoute => {
 
     if (res.status === "success") {
       setPaths(res.path);
+      setTotalDistance(res.total_distance);
+      setTotalTime(res.total_time);
+      setLoading(false);
     } else if (res.status === "failure") {
       setError(res?.error);
       setPaths([]);
+      setLoading(false);
+      setTotalDistance(null);
+      setTotalTime(null);
       setTimeout(() => {
         setError("");
       }, 5000);
@@ -43,10 +63,13 @@ export const useGetRoute = (): IUseGetRoute => {
   };
 
   const getPathToken = async ({ origin, destination }: IPostRoute) => {
+    setLoading(true);
     const { res, err } = await postRoute({ origin, destination });
     if (err) {
       setError(err?.message);
       setPaths([]);
+      setTotalDistance(null);
+      setTotalTime(null);
       setTimeout(() => {
         setError("");
       }, 5000);
@@ -56,5 +79,13 @@ export const useGetRoute = (): IUseGetRoute => {
     getPathRoute({ token: res.token });
   };
 
-  return { getPathRoute, getPathToken, paths, error };
+  return {
+    getPathRoute,
+    getPathToken,
+    paths,
+    error,
+    totalDistance,
+    totalTime,
+    loading,
+  };
 };

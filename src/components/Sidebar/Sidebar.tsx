@@ -1,15 +1,16 @@
 import React, { FormEvent, useState } from "react";
+import { Icon } from "@iconify/react";
 import { useGetRoute } from "../../hooks";
 import "./index.css";
 
 export const Sidebar: React.FC = () => {
   const [origin, setOrigin] = useState<string>("");
   const [destination, setDestination] = useState<string>("");
-  const { getPathToken, error } = useGetRoute();
+  const { getPathToken, totalDistance, totalTime, loading } = useGetRoute();
 
   const onSubmit = async (e?: FormEvent<HTMLFormElement>): Promise<void> => {
     if (e) {
-      e?.preventDefault();
+      e.preventDefault();
     }
     await getPathToken({ origin, destination });
   };
@@ -21,25 +22,31 @@ export const Sidebar: React.FC = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="sidebar-container p-3">
-        <h1 className="display-5 text-center">Location points</h1>
+      <div className="sidebar-container p-4">
+        <h1 className="display-5 text-center">Route Finder!</h1>
+        <h4 className="text-center">Now find routes easily.</h4>
+        <h4 className="text-center">
+          Simply enter the origin and destination, then search!
+        </h4>
         <div className="d-flex flex-column mt-5">
           <label htmlFor="start-point" className="mb-1">
-            Start point
+            Origin:
           </label>
           <div className="d-flex align-items-center">
             <input
               id="start-point"
               data-testid="start-point-input"
               className="w-100"
+              disabled={loading}
               onChange={(e) => setOrigin(e.target.value)}
               value={origin}
             />
             <button
               type="button"
-              className="close btn btn btn-outline-secondary ms-3 btn-sm"
+              className="close btn btn btn-outline-danger ms-3 btn-sm"
               data-testid="start-point-clear"
               aria-label="Close"
+              disabled={loading}
               onClick={() => setOrigin("")}
             >
               <span aria-hidden="true">&times;</span>
@@ -48,20 +55,22 @@ export const Sidebar: React.FC = () => {
         </div>
         <div className="d-flex flex-column mt-5">
           <label htmlFor="end-point" className="mb-1">
-            End point
+            Destination:
           </label>
           <div className="d-flex align-items-center">
             <input
               id="end-point"
               className="w-100"
+              disabled={loading}
               data-testid="end-point-input"
               onChange={(e) => setDestination(e.target.value)}
               value={destination}
             />
             <button
               type="button"
-              className="close btn btn btn-outline-secondary ms-3 btn-sm"
+              className="close btn btn btn-outline-danger ms-3 btn-sm"
               aria-label="Close"
+              disabled={loading}
               data-testid="end-point-clear"
               onClick={() => setDestination("")}
             >
@@ -69,29 +78,52 @@ export const Sidebar: React.FC = () => {
             </button>
           </div>
         </div>
-        <div className="d-flex flex-row mt-4">
-          <button
-            className="btn btn-success me-3"
-            type="button"
-            data-testid="sidebar-submit"
-            onClick={() => onSubmit()}
-            disabled={!origin || !destination}
-          >
-            Submit
-          </button>
-          <button
-            className="btn btn-danger"
-            data-testid="sidebar-cancel"
-            onClick={() => onCancel()}
-          >
-            Cancel
-          </button>
-        </div>
-        {error ? (
-          <p className="text-danger mt-4" data-testid="sidebar-error">
-            {error}
-          </p>
-        ) : null}
+
+        {loading ? (
+          <div className="spinner-border mt-4 text-primary" role="status"></div>
+        ) : (
+          <div className="d-flex flex-row mt-4">
+            <button
+              className="btn btn-success me-3"
+              data-testid="sidebar-submit"
+              disabled={!origin || !destination || loading}
+            >
+              Search
+            </button>
+            <button
+              type="button"
+              className="btn btn-danger"
+              data-testid="sidebar-cancel"
+              disabled={loading}
+              onClick={() => onCancel()}
+            >
+              Clear All
+            </button>
+          </div>
+        )}
+        {totalDistance && (
+          <div className="d-flex align-items-end mt-4">
+            <Icon
+              icon="material-symbols:route"
+              color="#ff671d"
+              width="30"
+              height="30"
+            />
+            <h5 className="m-0">Distance to destination:</h5>
+            <h5 className="m-0 ms-2" data-testid="sidebar-distance">
+              {totalDistance}
+            </h5>
+          </div>
+        )}
+        {totalTime && (
+          <div className="d-flex align-items-end mt-4">
+            <Icon icon="guidance:time" color="#ff671d" width="30" height="30" />
+            <h5 className="m-0">Total travel time:</h5>
+            <h5 className="m-0 ms-2" data-testid="sidebar-distance">
+              {totalTime}
+            </h5>
+          </div>
+        )}
       </div>
     </form>
   );
