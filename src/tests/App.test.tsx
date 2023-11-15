@@ -8,7 +8,7 @@ import {
   cleanup,
 } from "@testing-library/react";
 import { GlobalContext } from "../context/GlobalContext";
-import { Sidebar } from "../components";
+import { Alert, Sidebar } from "../components";
 import * as helpers from "../helpers";
 
 jest.mock("../helpers");
@@ -28,7 +28,10 @@ describe("Globalcontext test", () => {
     }));
     render(
       <GlobalContext>
-        <Sidebar />
+        <div>
+          <Sidebar />
+          <Alert />
+        </div>
       </GlobalContext>
     );
 
@@ -43,7 +46,7 @@ describe("Globalcontext test", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTestId("sidebar-error")).toBeInTheDocument();
+      expect(screen.getByTestId("alert-element")).toBeInTheDocument();
     });
   });
 
@@ -59,7 +62,10 @@ describe("Globalcontext test", () => {
     }));
     render(
       <GlobalContext>
-        <Sidebar />
+        <div>
+          <Sidebar />
+          <Alert />
+        </div>
       </GlobalContext>
     );
 
@@ -74,7 +80,7 @@ describe("Globalcontext test", () => {
     });
 
     await waitFor(() => {
-      expect(screen.queryByTestId("sidebar-error")).toBeNull();
+      expect(screen.queryByTestId("alert-element")).toBeNull();
     });
   });
 
@@ -90,7 +96,10 @@ describe("Globalcontext test", () => {
     }));
     render(
       <GlobalContext>
-        <Sidebar />
+        <div>
+          <Sidebar />
+          <Alert />
+        </div>
       </GlobalContext>
     );
 
@@ -105,7 +114,7 @@ describe("Globalcontext test", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTestId("sidebar-error")).toHaveTextContent(
+      expect(screen.getByTestId("alert-element")).toHaveTextContent(
         "Internal server error"
       );
     });
