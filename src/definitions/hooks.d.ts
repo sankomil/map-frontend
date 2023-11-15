@@ -12,4 +12,5 @@ export interface IUseGetRoute {
   paths: string[][] | null;
   totalTime: number | null;
   totalDistance: number | null;
+  loading: boolean;
 }
