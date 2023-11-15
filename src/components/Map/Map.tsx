@@ -5,19 +5,18 @@ import "./index.css";
 
 export const Map: React.FC = () => {
   const { paths } = useGlobalContext();
-  console.log("paths", paths);
   return (
     <div className="map-container">
       <GoogleMap
         zoom={12.5}
         center={{
-          lat: paths.length ? parseFloat(paths[0][0]) : 22.396428,
-          lng: paths.length ? parseFloat(paths[0][1]) : 114.109497,
+          lat: paths?.length ? parseFloat(paths[0][0]) : 22.396428,
+          lng: paths?.length ? parseFloat(paths[0][1]) : 114.109497,
         }}
         gestureHandling={"greedy"}
         disableDefaultUI={true}
       >
-        {paths.map((path, index) => {
+        {paths?.map((path, index) => {
           return (
             <Marker
               key={`${path[0]}-${path[1]}-${index}`}

@@ -1,12 +1,11 @@
 import React, { FormEvent, useState } from "react";
-import { useGetRoute, useGlobalContext } from "../../hooks";
+import { useGetRoute } from "../../hooks";
 import "./index.css";
 
 export const Sidebar: React.FC = () => {
   const [origin, setOrigin] = useState<string>("");
   const [destination, setDestination] = useState<string>("");
-  const { error } = useGlobalContext();
-  const { getPathToken } = useGetRoute();
+  const { getPathToken, error } = useGetRoute();
 
   const onSubmit = async (e?: FormEvent<HTMLFormElement>): Promise<void> => {
     if (e) {
@@ -31,12 +30,15 @@ export const Sidebar: React.FC = () => {
           <div className="d-flex align-items-center">
             <input
               id="start-point"
+              data-testid="start-point-input"
               className="w-100"
               onChange={(e) => setOrigin(e.target.value)}
+              value={origin}
             />
             <button
               type="button"
               className="close btn btn btn-outline-secondary ms-3 btn-sm"
+              data-testid="start-point-clear"
               aria-label="Close"
               onClick={() => setOrigin("")}
             >
@@ -52,12 +54,15 @@ export const Sidebar: React.FC = () => {
             <input
               id="end-point"
               className="w-100"
+              data-testid="end-point-input"
               onChange={(e) => setDestination(e.target.value)}
+              value={destination}
             />
             <button
               type="button"
               className="close btn btn btn-outline-secondary ms-3 btn-sm"
               aria-label="Close"
+              data-testid="end-point-clear"
               onClick={() => setDestination("")}
             >
               <span aria-hidden="true">&times;</span>
@@ -68,16 +73,25 @@ export const Sidebar: React.FC = () => {
           <button
             className="btn btn-success me-3"
             type="button"
+            data-testid="sidebar-submit"
             onClick={() => onSubmit()}
-            disabled={!origin && !destination}
+            disabled={!origin || !destination}
           >
             Submit
           </button>
-          <button className="btn btn-danger" onClick={() => onCancel()}>
+          <button
+            className="btn btn-danger"
+            data-testid="sidebar-cancel"
+            onClick={() => onCancel()}
+          >
             Cancel
           </button>
         </div>
-        {error ? <p className="text-danger mt-4">{error}</p> : null}
+        {error ? (
+          <p className="text-danger mt-4" data-testid="sidebar-error">
+            {error}
+          </p>
+        ) : null}
       </div>
     </form>
   );
