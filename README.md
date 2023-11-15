@@ -1,46 +1,84 @@
-# Getting Started with Create React App
+# Route Finder!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An easy to use project that allows users to search origin and destination, and display it on a map.
 
-## Available Scripts
+This project was bootstrapped with Create React App
 
-In the project directory, you can run:
+## Frameworks and libraries employed
 
-### `yarn start`
+1. **ReactJS**. One of the most popular JS libraries. It makes frontend easier and streamlined, not to mention the plethora of libraries that provide added functionality.
+2. **Bootstrap**, for responsive and streamlined styling. The library is extremely to use and very versatile, offering a lot of options for developing various designs that are suited for all sorts of devices.
+3. **Typescript** making the project strongly typed and reducing inevitable bugs that would have caused issues at runtime. Not to mention it works extremely well with Eslint, thus killing two birds with one stone.
+4. **Axios** for making API calls and handling error states.
+5. **Jest and React Testing Library** for better integration and unit testing. RTL provides lots of functionalities to test individual hooks as well as states, which made is useful for this project.
+6. **React Google Maps** is a relatively new library and acts as a React wrapper for Google Maps JavaScript Api. This allowed me to streamline a lot of the API interactions.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Structure
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The bulk of this project exists within `./src/` folder. Here you can find the project broken into various folders:
 
-### `yarn test`
+```shell
+├───public
+└───src
+    ├───App
+    ├───components
+    │   ├───Alert
+    │   ├───Map
+    │   └───Sidebar
+    ├───context
+    ├───definitions
+    ├───helpers
+    ├───hooks
+    └───tests
+        ├───__mocks__
+        └───__snapshots__
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Running the application
 
-### `yarn build`
+Please make sure you have the prequisites installed:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- node: v16.13.1
+- yarn: v1.22.5
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This project does not use `npm` for package management, attempting to use it to install libraries may lead to errors.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Before running the application make sure the `.env` variables have been set up correctly. Provide the endpoint for the API to `REACT_APP_ENDPOINT` without any trailing slashes.
 
-### `yarn eject`
+A Google API ID is needed to run this project. 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Getting a google API ID
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Navigate to `https://console.cloud.google.com/` and create a new project.
+2. In the sidepanel, select API and services > Credentials.
+3. Click Create Credentials > API Key, and set the restrictions as needed. Save this generated key.
+4. In the search bar at the top, search `Maps JavaScript Api`. An option should appear for the Marketplace, select it.
+5. In the newly opened page, enable the API.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+You can now use the generated in the project. Set it as `REACT_APP_GOOGLE_API_ID` value in `.env`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Commands
 
-## Learn More
+```shell
+git clone https://github.com/sankomil/map-frontend.git
+cd map-frontend
+yarn
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Once all packages have been installed, run the application with:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```shell
+yarn start
+```
+
+Tests can be run via:
+
+```shell
+yarn test
+```
+
+The project can be built for production with:
+
+```shell
+yarn build
+```
