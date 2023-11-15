@@ -3,7 +3,6 @@ import { IGetRoute, IPostRoute } from "./axios";
 export interface IUseGlobalContext {
   error: string | null;
   paths: string[][] | null;
-  token: string | null;
 }
 
 export interface IUseGetRoute {
@@ -11,4 +10,6 @@ export interface IUseGetRoute {
   getPathToken: ({ origin, destination }: IPostRoute) => void;
   error: string | null;
   paths: string[][] | null;
+  totalTime: number | null;
+  totalDistance: number | null;
 }
