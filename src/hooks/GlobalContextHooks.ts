@@ -2,15 +2,20 @@ import { useContext } from "react";
 
 import { DefaultGlobalContext } from "../context/GlobalContext";
 import { getRoute, postRoute } from "../helpers";
-import { IPostRoute, IGetRoute } from "../definitions";
+import {
+  IPostRoute,
+  IGetRoute,
+  IUseGlobalContext,
+  IUseGetRoute,
+} from "../definitions";
 
-export const useGlobalContext = () => {
+export const useGlobalContext = (): IUseGlobalContext => {
   const { error, paths, token } = useContext(DefaultGlobalContext);
   return { paths, error, token };
 };
 
-export const useGetRoute = () => {
-  const { setPaths, setError } = useContext(DefaultGlobalContext);
+export const useGetRoute = (): IUseGetRoute => {
+  const { setPaths, setError, paths, error } = useContext(DefaultGlobalContext);
 
   const getPathRoute = async ({ token }: IGetRoute) => {
     const { res, err } = await getRoute({ token: token || "" });
@@ -51,5 +56,5 @@ export const useGetRoute = () => {
     getPathRoute({ token: res.token });
   };
 
-  return { getPathRoute, getPathToken };
+  return { getPathRoute, getPathToken, paths, error };
 };
