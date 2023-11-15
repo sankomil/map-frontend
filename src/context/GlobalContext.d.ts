@@ -3,6 +3,10 @@ export interface IGlobalContext {
   setPaths: Function;
   error: string | null;
   setError: Function;
-  token: string | null;
-  setToken: Function;
+  totalDistance: number | null;
+  setTotalDistance: Function;
+  totalTime: number | null;
+  setTotalTime: Function;
+  loading: boolean;
+  setLoading: Function;
 }

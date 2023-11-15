@@ -7,16 +7,33 @@ export const DefaultGlobalContext = React.createContext<IGlobalContext>({
   setError: () => {},
   paths: [],
   setPaths: () => {},
-  token: null,
-  setToken: () => {},
+  totalDistance: null,
+  setTotalDistance: () => {},
+  totalTime: null,
+  setTotalTime: () => {},
+  loading: false,
+  setLoading: () => {},
 });
 
 export const GlobalContext = ({ children }: ReactChildren) => {
   const [error, setError] = useState<string | null>(null);
   const [paths, setPaths] = useState<string[][]>([]);
-  const [token, setToken] = useState<string | null>(null);
+  const [totalDistance, setTotalDistance] = useState<number | null>(null);
+  const [totalTime, setTotalTime] = useState<number | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const value = { error, setError, paths, setPaths, token, setToken };
+  const value = {
+    error,
+    setError,
+    paths,
+    setPaths,
+    totalDistance,
+    totalTime,
+    setTotalDistance,
+    setTotalTime,
+    loading,
+    setLoading,
+  };
 
   return (
     <DefaultGlobalContext.Provider value={value}>
