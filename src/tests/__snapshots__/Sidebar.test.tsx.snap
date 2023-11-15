@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sidebar test Component renders 1`] = `
+<div>
+  <form>
+    <div
+      class="sidebar-container p-3"
+    >
+      <h1
+        class="display-5 text-center"
+      >
+        Location points
+      </h1>
+      <div
+        class="d-flex flex-column mt-5"
+      >
+        <label
+          class="mb-1"
+          for="start-point"
+        >
+          Start point
+        </label>
+        <div
+          class="d-flex align-items-center"
+        >
+          <input
+            class="w-100"
+            data-testid="start-point-input"
+            id="start-point"
+            value=""
+          />
+          <button
+            aria-label="Close"
+            class="close btn btn btn-outline-secondary ms-3 btn-sm"
+            data-testid="start-point-clear"
+            type="button"
+          >
+            <span
+              aria-hidden="true"
+            >
+              ×
+            </span>
+          </button>
+        </div>
+      </div>
+      <div
+        class="d-flex flex-column mt-5"
+      >
+        <label
+          class="mb-1"
+          for="end-point"
+        >
+          End point
+        </label>
+        <div
+          class="d-flex align-items-center"
+        >
+          <input
+            class="w-100"
+            data-testid="end-point-input"
+            id="end-point"
+            value=""
+          />
+          <button
+            aria-label="Close"
+            class="close btn btn btn-outline-secondary ms-3 btn-sm"
+            data-testid="end-point-clear"
+            type="button"
+          >
+            <span
+              aria-hidden="true"
+            >
+              ×
+            </span>
+          </button>
+        </div>
+      </div>
+      <div
+        class="d-flex flex-row mt-4"
+      >
+        <button
+          class="btn btn-success me-3"
+          data-testid="sidebar-submit"
+          disabled=""
+          type="button"
+        >
+          Submit
+        </button>
+        <button
+          class="btn btn-danger"
+          data-testid="sidebar-cancel"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+`;
