@@ -9,14 +9,12 @@ export const Route: React.FC<{ paths: string[][] | null }> = ({ paths }) => {
   const [directionsRenderer, setDirectionsRenderer] =
     useState<google.maps.DirectionsRenderer>();
 
-  // Initialise service and renderer for directions
   useEffect(() => {
     if (!routes || !map) return;
     setDirectionsService(new routes.DirectionsService());
     setDirectionsRenderer(new routes.DirectionsRenderer({ map }));
   }, [routes, map]);
 
-  // Use the directions service when paths is changed
   useEffect(() => {
     if (!directionsService || !directionsRenderer || !paths?.length || !paths) {
       return;
@@ -44,7 +42,7 @@ export const Route: React.FC<{ paths: string[][] | null }> = ({ paths }) => {
         directionsRenderer.setDirections(response);
       });
 
-    return () => directionsRenderer.setMap(null);
+    // return () => directionsRenderer.setMap(null);
   }, [directionsService, directionsRenderer, paths]);
 
   return <div />;
