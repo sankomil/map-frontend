@@ -1,4 +1,5 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useRef, useState } from "react";
+import { useAutocomplete } from "@vis.gl/react-google-maps";
 import { Icon } from "@iconify/react";
 import { useGetRoute } from "../../hooks";
 import "./index.css";
@@ -6,7 +7,41 @@ import "./index.css";
 export const Sidebar: React.FC = () => {
   const [origin, setOrigin] = useState<string>("");
   const [destination, setDestination] = useState<string>("");
-  const { getPathToken, totalDistance, totalTime, loading } = useGetRoute();
+  const { getPathToken, totalDistance, totalTime, loading, resetAll } =
+    useGetRoute();
+
+  const originRef = useRef<HTMLInputElement>(null);
+  const destinationRef = useRef<HTMLInputElement>(null);
+
+  const onOriginPlaceChange = (place: google.maps.places.PlaceResult) => {
+    console.log("origin place", place);
+    if (place) {
+      setOrigin(place.formatted_address || place.name || "");
+    }
+
+    // Keep focus on input element
+    originRef.current && originRef.current.focus();
+  };
+
+  const onDestinationPlaceChange = (place: google.maps.places.PlaceResult) => {
+    console.log("destination place", place);
+    if (place) {
+      setDestination(place.formatted_address || place.name || "");
+    }
+
+    // Keep focus on input element
+    destinationRef.current && destinationRef.current.focus();
+  };
+
+  useAutocomplete({
+    inputField: originRef && originRef.current,
+    onPlaceChanged: onOriginPlaceChange,
+  });
+
+  useAutocomplete({
+    inputField: destinationRef && destinationRef.current,
+    onPlaceChanged: onDestinationPlaceChange,
+  });
 
   const onSubmit = async (e?: FormEvent<HTMLFormElement>): Promise<void> => {
     if (e) {
@@ -18,6 +53,7 @@ export const Sidebar: React.FC = () => {
   const onCancel = (): void => {
     setOrigin("");
     setDestination("");
+    resetAll();
   };
 
   return (
@@ -28,7 +64,7 @@ export const Sidebar: React.FC = () => {
         <h4 className="text-center">
           Simply enter the origin and destination, then search!
         </h4>
-        <div className="d-flex flex-column mt-5">
+        <div className="d-flex flex-column mt-4">
           <label htmlFor="start-point" className="mb-1">
             Origin:
           </label>
@@ -37,6 +73,7 @@ export const Sidebar: React.FC = () => {
               id="start-point"
               data-testid="start-point-input"
               className="w-100"
+              ref={originRef}
               disabled={loading}
               onChange={(e) => setOrigin(e.target.value)}
               value={origin}
@@ -53,7 +90,7 @@ export const Sidebar: React.FC = () => {
             </button>
           </div>
         </div>
-        <div className="d-flex flex-column mt-5">
+        <div className="d-flex flex-column mt-3">
           <label htmlFor="end-point" className="mb-1">
             Destination:
           </label>
@@ -62,6 +99,7 @@ export const Sidebar: React.FC = () => {
               id="end-point"
               className="w-100"
               disabled={loading}
+              ref={destinationRef}
               data-testid="end-point-input"
               onChange={(e) => setDestination(e.target.value)}
               value={destination}
@@ -83,22 +121,28 @@ export const Sidebar: React.FC = () => {
           <div className="spinner-border mt-4 text-primary" role="status"></div>
         ) : (
           <div className="d-flex flex-row mt-4">
-            <button
-              className="btn btn-success me-3"
-              data-testid="sidebar-submit"
-              disabled={!origin || !destination || loading}
-            >
-              Search
-            </button>
-            <button
-              type="button"
-              className="btn btn-danger"
-              data-testid="sidebar-cancel"
-              disabled={loading}
-              onClick={() => onCancel()}
-            >
-              Clear All
-            </button>
+            <div className="me-3 d-flex flex-column align-items-center">
+              <button
+                className="btn btn-outline-success"
+                data-testid="sidebar-submit"
+                disabled={!origin || !destination || loading}
+              >
+                <Icon icon="ri:direction-fill" width="30" height="30" />
+              </button>
+              <p className="text-success">Search</p>
+            </div>
+            <div className="me-3 d-flex flex-column align-items-center">
+              <button
+                type="button"
+                className="btn btn-outline-danger"
+                data-testid="sidebar-cancel"
+                disabled={loading}
+                onClick={() => onCancel()}
+              >
+                <Icon icon="mdi:clear-bold" width="30" height="30" />
+              </button>
+              <p className="text-danger">Reset</p>
+            </div>
           </div>
         )}
         {totalDistance && (

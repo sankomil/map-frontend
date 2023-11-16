@@ -22,7 +22,7 @@ exports[`Sidebar test Component renders 1`] = `
         Simply enter the origin and destination, then search!
       </h4>
       <div
-        class="d-flex flex-column mt-5"
+        class="d-flex flex-column mt-4"
       >
         <label
           class="mb-1"
@@ -54,7 +54,7 @@ exports[`Sidebar test Component renders 1`] = `
         </div>
       </div>
       <div
-        class="d-flex flex-column mt-5"
+        class="d-flex flex-column mt-3"
       >
         <label
           class="mb-1"
@@ -88,20 +88,38 @@ exports[`Sidebar test Component renders 1`] = `
       <div
         class="d-flex flex-row mt-4"
       >
-        <button
-          class="btn btn-success me-3"
-          data-testid="sidebar-submit"
-          disabled=""
+        <div
+          class="me-3 d-flex flex-column align-items-center"
         >
-          Search
-        </button>
-        <button
-          class="btn btn-danger"
-          data-testid="sidebar-cancel"
-          type="button"
+          <button
+            class="btn btn-outline-success"
+            data-testid="sidebar-submit"
+            disabled=""
+          >
+            <span />
+          </button>
+          <p
+            class="text-success"
+          >
+            Search
+          </p>
+        </div>
+        <div
+          class="me-3 d-flex flex-column align-items-center"
         >
-          Clear All
-        </button>
+          <button
+            class="btn btn-outline-danger"
+            data-testid="sidebar-cancel"
+            type="button"
+          >
+            <span />
+          </button>
+          <p
+            class="text-danger"
+          >
+            Reset
+          </p>
+        </div>
       </div>
     </div>
   </form>
