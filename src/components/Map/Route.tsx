@@ -18,7 +18,7 @@ export const Route: React.FC<{ paths: string[][] | null }> = ({ paths }) => {
 
   // Use the directions service when paths is changed
   useEffect(() => {
-    if (!directionsService || !directionsRenderer || !paths?.length) {
+    if (!directionsService || !directionsRenderer || !paths?.length || !paths) {
       return;
     }
 
@@ -43,6 +43,8 @@ export const Route: React.FC<{ paths: string[][] | null }> = ({ paths }) => {
       .then((response: any) => {
         directionsRenderer.setDirections(response);
       });
+
+    return () => directionsRenderer.setMap(null);
   }, [directionsService, directionsRenderer, paths]);
 
   return <div />;
