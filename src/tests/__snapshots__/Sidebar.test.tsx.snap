@@ -8,6 +8,7 @@ exports[`Sidebar test Component renders 1`] = `
     >
       <div
         class="sidebar-container p-4"
+        data-testid="sidebar-container"
       >
         <h1
           class="display-5 text-center"
@@ -122,6 +123,7 @@ exports[`Sidebar test Component renders 1`] = `
       </div>
       <div
         class="toggle-container"
+        data-testid="sidebar-toggle"
       >
         <span />
       </div>

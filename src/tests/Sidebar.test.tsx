@@ -60,4 +60,17 @@ describe("Sidebar test", () => {
 
     expect(screen.getByTestId("sidebar-submit")).toHaveAttribute("disabled");
   });
+
+  test("Sidebar container classes change when toggled", () => {
+    render(<Sidebar />);
+
+    expect(screen.getByTestId("sidebar-container")).not.toHaveClass(
+      "sidebar-container-close"
+    );
+
+    fireEvent.click(screen.getByTestId("sidebar-toggle"));
+    expect(screen.getByTestId("sidebar-container")).toHaveClass(
+      "sidebar-container-close"
+    );
+  });
 });

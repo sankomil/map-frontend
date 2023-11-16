@@ -61,6 +61,7 @@ export const Sidebar: React.FC = () => {
     <form onSubmit={onSubmit}>
       <div className="d-flex">
         <div
+          data-testid="sidebar-container"
           className={clsx("sidebar-container p-4", {
             "sidebar-container-close": !showSidebar,
           })}
@@ -181,6 +182,7 @@ export const Sidebar: React.FC = () => {
           )}
         </div>
         <div
+          data-testid="sidebar-toggle"
           className={clsx("toggle-container", {
             "toggle-container-close": !showSidebar,
           })}
