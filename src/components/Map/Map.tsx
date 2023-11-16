@@ -16,7 +16,7 @@ export const Map: React.FC = () => {
           lng: paths?.length ? parseFloat(paths[0][1]) : 114.109497,
         }}
         gestureHandling={"greedy"}
-        disableDefaultUI={false}
+        disableDefaultUI={true}
       ></GoogleMap>
       <Route paths={paths} />
     </div>
