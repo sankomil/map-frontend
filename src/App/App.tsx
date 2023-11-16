@@ -6,7 +6,10 @@ import { GlobalContext } from "../context/GlobalContext";
 
 function App() {
   return (
-    <APIProvider apiKey={process.env.REACT_APP_GOOGLE_API_ID || ""}>
+    <APIProvider
+      apiKey={process.env.REACT_APP_GOOGLE_API_ID || ""}
+      libraries={["places"]}
+    >
       <GlobalContext>
         <div style={{ position: "relative" }}>
           <Sidebar />
