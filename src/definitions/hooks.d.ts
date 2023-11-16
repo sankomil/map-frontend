@@ -8,6 +8,7 @@ export interface IUseGlobalContext {
 export interface IUseGetRoute {
   getPathRoute: ({ token }: IGetRoute) => void;
   getPathToken: ({ origin, destination }: IPostRoute) => void;
+  resetAll: () => void;
   error: string | null;
   paths: string[][] | null;
   totalTime: number | null;

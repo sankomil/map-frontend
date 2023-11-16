@@ -67,6 +67,7 @@ export const useGetRoute = (): IUseGetRoute => {
     const { res, err } = await postRoute({ origin, destination });
     if (err) {
       setError(err?.message);
+      setLoading(false);
       setPaths([]);
       setTotalDistance(null);
       setTotalTime(null);
@@ -79,6 +80,14 @@ export const useGetRoute = (): IUseGetRoute => {
     getPathRoute({ token: res.token });
   };
 
+  const resetAll = () => {
+    setError(null);
+    setLoading(false);
+    setPaths([]);
+    setTotalDistance(null);
+    setTotalTime(null);
+  };
+
   return {
     getPathRoute,
     getPathToken,
@@ -87,5 +96,6 @@ export const useGetRoute = (): IUseGetRoute => {
     totalDistance,
     totalTime,
     loading,
+    resetAll,
   };
 };
