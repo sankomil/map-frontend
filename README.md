@@ -2,6 +2,9 @@
 
 An easy to use project that allows users to search origin and destination, and display it on a map.
 
+![image](https://github.com/sankomil/map-frontend/assets/43489998/40125237-b6be-4461-a500-71a6cef9dda5)
+
+
 This project was bootstrapped with Create React App
 
 ## Frameworks and libraries employed
