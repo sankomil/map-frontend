@@ -4,122 +4,126 @@ exports[`Sidebar test Component renders 1`] = `
 <div>
   <form>
     <div
-      class="sidebar-container p-4"
+      class="d-flex"
     >
-      <h1
-        class="display-5 text-center"
-      >
-        Route Finder!
-      </h1>
-      <h4
-        class="text-center"
-      >
-        Now find routes easily.
-      </h4>
-      <h4
-        class="text-center"
-      >
-        Simply enter the origin and destination, then search!
-      </h4>
       <div
-        class="d-flex flex-column mt-4"
+        class="sidebar-container p-4"
       >
-        <label
-          class="mb-1"
-          for="start-point"
+        <h1
+          class="display-5 text-center"
         >
-          Origin:
-        </label>
+          Route Finder!
+        </h1>
+        <h4
+          class="text-center"
+        >
+          Now find routes easily.
+        </h4>
         <div
-          class="d-flex align-items-center"
+          class="d-flex flex-column mt-4"
         >
-          <input
-            class="w-100"
-            data-testid="start-point-input"
-            id="start-point"
-            value=""
-          />
-          <button
-            aria-label="Close"
-            class="close btn btn btn-outline-danger ms-3 btn-sm"
-            data-testid="start-point-clear"
-            type="button"
+          <label
+            class="mb-1"
+            for="start-point"
           >
-            <span
-              aria-hidden="true"
+            Origin:
+          </label>
+          <div
+            class="d-flex align-items-center"
+          >
+            <input
+              class="w-100"
+              data-testid="start-point-input"
+              id="start-point"
+              value=""
+            />
+            <button
+              aria-label="Close"
+              class="close btn btn btn-outline-danger ms-3 btn-sm"
+              data-testid="start-point-clear"
+              type="button"
             >
-              ×
-            </span>
-          </button>
+              <span
+                aria-hidden="true"
+              >
+                ×
+              </span>
+            </button>
+          </div>
+        </div>
+        <div
+          class="d-flex flex-column mt-3"
+        >
+          <label
+            class="mb-1"
+            for="end-point"
+          >
+            Destination:
+          </label>
+          <div
+            class="d-flex align-items-center"
+          >
+            <input
+              class="w-100"
+              data-testid="end-point-input"
+              id="end-point"
+              value=""
+            />
+            <button
+              aria-label="Close"
+              class="close btn btn btn-outline-danger ms-3 btn-sm"
+              data-testid="end-point-clear"
+              type="button"
+            >
+              <span
+                aria-hidden="true"
+              >
+                ×
+              </span>
+            </button>
+          </div>
+        </div>
+        <div
+          class="d-flex flex-row mt-4"
+        >
+          <div
+            class="me-3 d-flex flex-column align-items-center"
+          >
+            <button
+              class="btn btn-outline-success"
+              data-testid="sidebar-submit"
+              disabled=""
+            >
+              <span />
+            </button>
+            <p
+              class="text-success"
+            >
+              Search
+            </p>
+          </div>
+          <div
+            class="me-3 d-flex flex-column align-items-center"
+          >
+            <button
+              class="btn btn-outline-danger"
+              data-testid="sidebar-cancel"
+              type="button"
+            >
+              <span />
+            </button>
+            <p
+              class="text-danger"
+            >
+              Reset
+            </p>
+          </div>
         </div>
       </div>
       <div
-        class="d-flex flex-column mt-3"
+        class="toggle-container"
       >
-        <label
-          class="mb-1"
-          for="end-point"
-        >
-          Destination:
-        </label>
-        <div
-          class="d-flex align-items-center"
-        >
-          <input
-            class="w-100"
-            data-testid="end-point-input"
-            id="end-point"
-            value=""
-          />
-          <button
-            aria-label="Close"
-            class="close btn btn btn-outline-danger ms-3 btn-sm"
-            data-testid="end-point-clear"
-            type="button"
-          >
-            <span
-              aria-hidden="true"
-            >
-              ×
-            </span>
-          </button>
-        </div>
-      </div>
-      <div
-        class="d-flex flex-row mt-4"
-      >
-        <div
-          class="me-3 d-flex flex-column align-items-center"
-        >
-          <button
-            class="btn btn-outline-success"
-            data-testid="sidebar-submit"
-            disabled=""
-          >
-            <span />
-          </button>
-          <p
-            class="text-success"
-          >
-            Search
-          </p>
-        </div>
-        <div
-          class="me-3 d-flex flex-column align-items-center"
-        >
-          <button
-            class="btn btn-outline-danger"
-            data-testid="sidebar-cancel"
-            type="button"
-          >
-            <span />
-          </button>
-          <p
-            class="text-danger"
-          >
-            Reset
-          </p>
-        </div>
+        <span />
       </div>
     </div>
   </form>
