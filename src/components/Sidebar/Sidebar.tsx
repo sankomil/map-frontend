@@ -14,7 +14,6 @@ export const Sidebar: React.FC = () => {
   const destinationRef = useRef<HTMLInputElement>(null);
 
   const onOriginPlaceChange = (place: google.maps.places.PlaceResult) => {
-    console.log("origin place", place);
     if (place) {
       setOrigin(place.formatted_address || place.name || "");
     }
@@ -24,7 +23,6 @@ export const Sidebar: React.FC = () => {
   };
 
   const onDestinationPlaceChange = (place: google.maps.places.PlaceResult) => {
-    console.log("destination place", place);
     if (place) {
       setDestination(place.formatted_address || place.name || "");
     }
