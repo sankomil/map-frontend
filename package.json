@@ -52,6 +52,8 @@
   },
   "devDependencies": {
     "@iconify/react": "^4.1.1",
+    "@types/googlemaps": "^3.43.3",
+    "@types/markerclustererplus": "^2.1.33",
     "jest-environment-jsdom": "^29.7.0"
   }
 }
