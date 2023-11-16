@@ -16,7 +16,12 @@ export const Route: React.FC<{ paths: string[][] | null }> = ({ paths }) => {
   }, [routes, map]);
 
   useEffect(() => {
-    if (!directionsService || !directionsRenderer || !paths?.length || !paths) {
+    if (!directionsService || !directionsRenderer) {
+      return;
+    }
+
+    if (!paths?.length || !paths) {
+      directionsRenderer.set("directions", null);
       return;
     }
 
