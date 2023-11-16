@@ -7,7 +7,11 @@ const getPathToken = jest.fn();
 
 jest.mock("../hooks", () => {
   return {
-    useGetRoute: jest.fn(() => ({ getPathToken, loading: false })),
+    useGetRoute: jest.fn(() => ({
+      getPathToken,
+      loading: false,
+      resetAll: jest.fn(),
+    })),
     useGlobalContext: jest.fn(() => ({ error: null })),
   };
 });
