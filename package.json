@@ -2,6 +2,7 @@
   "name": "map-frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@babel/preset-env": "^7.23.3",
     "@testing-library/jest-dom": "^5.14.1",
@@ -29,6 +30,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
+    "test:ci": "jest --coverage",
     "eject": "react-scripts eject",
     "tsc-noEmit": "tsc --noEmit"
   },
