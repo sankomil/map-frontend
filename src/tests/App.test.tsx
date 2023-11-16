@@ -16,6 +16,39 @@ jest.mock("../helpers");
 describe("Globalcontext test", () => {
   afterEach(cleanup);
 
+  test("Expect error message shown when get route returns error", async () => {
+    (helpers.postRoute as Function) = jest.fn(() => ({
+      res: { token: "1234" },
+    }));
+    (helpers.getRoute as Function) = jest.fn(() => ({
+      err: { code: 500, message: "Internal server error" },
+    }));
+    render(
+      <GlobalContext>
+        <div>
+          <Sidebar />
+          <Alert />
+        </div>
+      </GlobalContext>
+    );
+
+    await act(async () => {
+      fireEvent.input(screen.getByTestId("start-point-input"), {
+        target: { value: "Test" },
+      });
+      fireEvent.input(screen.getByTestId("end-point-input"), {
+        target: { value: "Test" },
+      });
+      fireEvent.click(screen.getByTestId("sidebar-submit"));
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId("alert-element")).toHaveTextContent(
+        "Internal server error"
+      );
+    });
+  });
+
   test("Expect error message shown when no route can be found", async () => {
     (helpers.postRoute as Function) = jest.fn(() => ({
       res: { token: "1234" },
@@ -118,5 +151,28 @@ describe("Globalcontext test", () => {
         "Internal server error"
       );
     });
+  });
+
+  test("Clear all inputs when Reset button is pressed", async () => {
+    render(
+      <GlobalContext>
+        <div>
+          <Sidebar />
+          <Alert />
+        </div>
+      </GlobalContext>
+    );
+    await act(async () => {
+      fireEvent.input(screen.getByTestId("start-point-input"), {
+        target: { value: "Test" },
+      });
+      fireEvent.input(screen.getByTestId("end-point-input"), {
+        target: { value: "Test" },
+      });
+      fireEvent.click(screen.getByTestId("sidebar-cancel"));
+    });
+
+    expect(screen.getByTestId("start-point-input")).toHaveValue("");
+    expect(screen.getByTestId("end-point-input")).toHaveValue("");
   });
 });

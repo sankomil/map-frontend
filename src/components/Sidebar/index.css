@@ -2,9 +2,48 @@
   position: fixed;
   top: 5%;
   left: 0;
-  width: 20%;
-  border: 1px solid black;
+  width: 300px;
   border-radius: 0 50px 50px 0;
   z-index: 10;
   background-color: #fff;
+  transition: 0.5s;
+}
+
+.sidebar-container-close {
+  left: -400px !important;
+}
+
+.toggle-container-close {
+  left: 0px !important;
+}
+
+.toggle-container {
+  height: 40px;
+  width: 25px;
+  position: absolute;
+  top: calc(5% + 70px);
+  left: 300px;
+  border-left: 1px solid #dadce0;
+  border-radius: 0 8px 8px 0;
+  background: #fff 7px center/7px 10px no-repeat;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+@media screen and (min-width: 950px) {
+  .sidebar-container {
+    width: 400px;
+  }
+
+  .toggle-container {
+    left: 400px;
+  }
+
+  .sidebar-container-close {
+    left: -400px;
+  }
 }
