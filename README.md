@@ -45,7 +45,7 @@ This project does not use `npm` for package management, attempting to use it to 
 
 Before running the application make sure the `.env` variables have been set up correctly. Provide the endpoint for the API to `REACT_APP_ENDPOINT` without any trailing slashes.
 
-A Google API ID is needed to run this project. 
+A Google API ID is needed to run this project.
 
 ### Getting a google API ID
 
@@ -81,4 +81,20 @@ The project can be built for production with:
 
 ```shell
 yarn build
+```
+
+### Docker
+
+The root directory of this project also contains a Dockerfile. This can be used to deploy a production build and to see the result as well as the coverage of the tests.
+
+#### Test coverage
+```shell
+docker build --target test -t map-frontend-test:latest .
+docker run map-frontend-test:latest
+```
+
+#### Production deployment
+```shell
+docker build -t map-frontend:latest .
+docker run -p 3000:3000 map-frontend:latest
 ```
