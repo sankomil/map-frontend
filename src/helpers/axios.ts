@@ -4,15 +4,20 @@ import {
   IGetRoute,
   IGetRouteResponse,
   IPostRouteResponse,
+  IGetRouteReturn,
+  IPostRouteReturn,
 } from "../definitions";
 
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_ENDPOINT,
 });
 
-export const postRoute = async ({ origin, destination }: IPostRoute) => {
+export const postRoute = async ({
+  origin,
+  destination,
+}: IPostRoute): Promise<IPostRouteReturn> => {
   let res: IPostRouteResponse = { token: "" };
-  let err: AxiosError | any = null;
+  let err: AxiosError | null = null;
 
   await axiosInstance
     .post("/route", {
@@ -30,9 +35,11 @@ export const postRoute = async ({ origin, destination }: IPostRoute) => {
   return { res, err };
 };
 
-export const getRoute = async ({ token }: IGetRoute) => {
+export const getRoute = async ({
+  token,
+}: IGetRoute): Promise<IGetRouteReturn> => {
   let res: IGetRouteResponse = { status: "failure" };
-  let err: AxiosError | any = null;
+  let err: AxiosError | null = null;
 
   await axiosInstance
     .get(`/route/${token}`)

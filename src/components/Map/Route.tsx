@@ -43,7 +43,7 @@ export const Route: React.FC<{ paths: string[][] | null }> = ({ paths }) => {
         travelMode: google.maps.TravelMode.DRIVING,
         provideRouteAlternatives: false,
       })
-      .then((response: any) => {
+      .then((response) => {
         directionsRenderer.setDirections(response);
       });
   }, [directionsService, directionsRenderer, paths]);
