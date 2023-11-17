@@ -21,7 +21,6 @@ export const Sidebar: React.FC = () => {
       setOrigin(place.formatted_address || place.name || "");
     }
 
-    // Keep focus on input element
     originRef.current && originRef.current.focus();
   };
 
@@ -30,7 +29,6 @@ export const Sidebar: React.FC = () => {
       setDestination(place.formatted_address || place.name || "");
     }
 
-    // Keep focus on input element
     destinationRef.current && destinationRef.current.focus();
   };
 
