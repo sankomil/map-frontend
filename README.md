@@ -65,16 +65,28 @@ cd map-frontend
 yarn
 ```
 
-Once all packages have been installed, run the application with:
+Once all packages have been installed, run the application:
 
 ```shell
 yarn start
 ```
 
-Tests can be run via:
+Tests:
 
 ```shell
 yarn test
+```
+
+Test coverage can be seen with:
+
+```shell
+yarn test:ci
+```
+
+TypeScript checking:
+
+```shell
+yarn tsc-noEmit
 ```
 
 The project can be built for production with:
@@ -88,12 +100,14 @@ yarn build
 The root directory of this project also contains a Dockerfile. This can be used to deploy a production build and to see the result as well as the coverage of the tests.
 
 #### Test coverage
+
 ```shell
 docker build --target test -t map-frontend-test:latest .
 docker run map-frontend-test:latest
 ```
 
 #### Production deployment
+
 ```shell
 docker build -t map-frontend:latest .
 docker run -p 3000:3000 map-frontend:latest
