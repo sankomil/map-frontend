@@ -1,3 +1,5 @@
+import { AxiosError } from "axios";
+
 export interface IPostRoute {
   origin: string;
   destination: string;
@@ -17,4 +19,14 @@ export interface IGetRouteResponse {
 
 export interface IPostRouteResponse {
   token: string;
+}
+
+export interface IGetRouteReturn {
+  res: IGetRouteResponse;
+  err: AxiosError | null;
+}
+
+export interface IPostRouteReturn {
+  res: IPostRouteResponse;
+  err: AxiosError | null;
 }
