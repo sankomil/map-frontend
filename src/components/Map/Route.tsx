@@ -46,8 +46,6 @@ export const Route: React.FC<{ paths: string[][] | null }> = ({ paths }) => {
       .then((response: any) => {
         directionsRenderer.setDirections(response);
       });
-
-    // return () => directionsRenderer.setMap(null);
   }, [directionsService, directionsRenderer, paths]);
 
   return <div />;
